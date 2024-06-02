@@ -75,7 +75,7 @@
               <h5>{{ $basket->prodect->name }}</h5>
               <p>{{ $basket->prodect->description }}</p>
               <div class="options">
-                <h6>{{ $basket->prodect->price }} EGP</h6>
+                <h6>{{ $basket->prodect->price }} $</h6>
                 <div class="btn-box">
                   <a href="{{ route('delbascetprodect', $basket->prodect->id) }}" class="btn btn-orange">حذف من السلة</a>
               </div>
@@ -95,7 +95,7 @@
               <h5>{{ $basket->offer->name }}</h5>
               <p>{{ $basket->offer->description }}</p>
               <div class="options">
-                <h6>{{ $basket->offer->price }} EGP</h6>
+                <h6>{{ $basket->offer->price }} $</h6>
                 <div class="btn-box">
                   <a href="{{ route('delbascet', $basket->offer->id) }}" class="btn btn-orange">حذف من السلة</a>
                 </div>

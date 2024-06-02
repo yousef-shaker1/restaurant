@@ -78,7 +78,7 @@
               <div class="product-details">
                   <h2>اسم العرض: {{ $offer->name }}</h2>
                   <p>تفاصيل المنتج: هذا المنتج هو عبارة عن {{ $offer->description }}</p>
-                  <p>السعر: EGP{{ $offer->price }}</p>
+                  <p>السعر: ${{ $offer->price }}</p>
                 @if(!empty(Auth::user()->name))
                   <a class="btn btn-primary" href="{{ route('Basketoffer', $offer->id) }}">إضافة إلى السلة</a>
                   <a href="{{ route('showuseroffer') }}" class="btn btn-primary">عودة الي الصفحة السابقة</a>

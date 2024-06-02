@@ -60,8 +60,8 @@
                               <td>{{ $order->time }}</td>
                               <td>{{ $order->prodect->name }}</td>
                               <td>{{ $order->count }}</td>
-                              <td>{{ $order->prodect->price }} EGP</td>
-                              <td>{{ $order->prodect->price * $order->count }} EGP</td>
+                              <td>{{ $order->prodect->price }} $</td>
+                              <td>{{ $order->prodect->price * $order->count }} $</td>
                               <td style="display: inline-block; width: auto; padding: 17px; text-align: center; vertical-align: middle;" class="
                                   @if ($order->status == 'يتم مراجعة الطلب') 
                                       bg-secondary text-white 
@@ -86,8 +86,8 @@
                               <td>{{ $offer->time }}</td>
                               <td>{{ $offer->offer->name }}</td>
                               <td>{{ $offer->count }}</td>
-                              <td>{{ $offer->offer->price }} EGP</td>
-                              <td>{{ $offer->offer->price * $offer->count }} EGP</td>
+                              <td>{{ $offer->offer->price }} $</td>
+                              <td>{{ $offer->offer->price * $offer->count }} $</td>
                               <td style="display: inline-block; width: auto; padding: 17px; text-align: center; vertical-align: middle;" class="
                                   @if ($offer->status == 'يتم مراجعة الطلب') 
                                       bg-secondary text-white 

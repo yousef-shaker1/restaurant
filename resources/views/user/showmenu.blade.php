@@ -78,7 +78,7 @@
               <div class="product-details">
                   <h2>اسم المنتج: {{ $prodect->name }}</h2>
                   <p>تفاصيل المنتج: هذا المنتج هو عبارة عن {{ $prodect->description }}</p>
-                  <p>السعر: EGP{{ $prodect->price }}</p>
+                  <p>السعر: ${{ $prodect->price }}</p>
                 @if(!empty(Auth::user()->name))
                   <a class="btn btn-primary" href="{{ route('Basket', $prodect->id) }}">إضافة إلى السلة</a>
                   <a href="{{ route('home.create') }}" class="btn btn-primary">عودة الي الصفحة السابقة</a>

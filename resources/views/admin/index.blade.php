@@ -49,7 +49,7 @@
                 <div class="card text-white bg-success">
                     <div class="card-body">
                         <h5 class="card-title">Revenue</h5>
-                        <p class="card-text">{{\App\Models\prodect::sum('price') }} EGP</p>
+                        <p class="card-text">{{\App\Models\prodect::sum('price') }} $</p>
                     </div>
                 </div>
             </div>

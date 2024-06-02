@@ -142,15 +142,15 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name">اسم منتج</label>
+                                <label for="name">اسم عرض</label>
                                 <input type="text" class="form-control" id="name" name="name">
-                                <label for="name">وصف منتج</label>
+                                <label for="name">وصف العرض</label>
                                 <input type="text" class="form-control" id="description" name="description">
-                                <label for="name">سعر المنتج </label>
+                                <label for="name">سعر العرض </label>
                                 <input type="text" class="form-control" id="price" name="price">
                                 <label for="section">القسم التابع لية</label>
 
-                                <label for="image">صورة المنتج</label>
+                                <label for="image">صورة العرض</label>
                                 <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>

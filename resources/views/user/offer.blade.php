@@ -101,7 +101,7 @@
             </div>
             <div class="detail-box">
               <h5>{{ $offer->name }}</h5>
-              <h6><span>{{ $offer->price  }} EGP</span></h6>
+              <h6><span>{{ $offer->price  }} $</span></h6>
               <a href="{{ route('offer.show', $offer->id) }}" class="order-now">Order Now
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>

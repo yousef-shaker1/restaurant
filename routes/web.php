@@ -44,7 +44,7 @@ Route::get('/register_customer',[CustomerController::class, 'register'])->name('
 Route::resource('/home', UserpageController::class);
 Route::get('/about', [UserpageController::class, 'about'])->name('home.about');
 Route::get('/Previousrequests', [UserpageController::class, 'Previousrequests'])->name('Previous.requests');
-//authntcation
+//authntcation 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

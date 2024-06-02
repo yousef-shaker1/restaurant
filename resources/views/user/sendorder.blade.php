@@ -107,7 +107,7 @@
                 <div class="product-details mt-4">
                     <h2>اسم المنتج: {{ $prodect->name }}</h2>
                     <p>تفاصيل المنتج: هذا المنتج هو عبارة عن {{ $prodect->description }}</p>
-                    <p>السعر: EGP{{ $prodect->price }}</p>
+                    <p>السعر: ${{ $prodect->price }}</p>
                     <a href="{{ route('Basketall') }}" class="btn btn-primary">عودة الي الصفحة السابقة</a>
                     <a href="{{ route('showuseroffer') }}" class="btn btn-primary">عودة الي صفحة جميع العروض</a>
                 </div>
@@ -134,7 +134,7 @@
                             <input type="hidden" id="count" name="count" value="1">
                         </div>
                         <div class="form-group">
-                            <div>الإجمالي المبلغ : EGP <span id="total">{{ $prodect->price }} </span></div>
+                            <div>الإجمالي المبلغ : $ <span id="total">{{ $prodect->price }} </span></div>
                         </div>
                         <button type='submit' class="btn btn-primary">pay with stripe</button>
                     </form>
