@@ -45,7 +45,7 @@ class OfferController extends Controller
     public function store(checkoffer $request)
     {
         $data = $request->validated();
-        $data['image'] = request()->file('image')->store('photo');
+        $data['image'] = request()->file('image')->store('photo', 'public');
         offer::create($data);
         Session()->flash('Add', 'تم اضافة العرض بنجاح');
         return redirect()->back();
@@ -96,18 +96,20 @@ class OfferController extends Controller
     //admin page
     public function update(checkoffer $request, string $id)
     {
-        $offer = offer::find($request->id);
+        $offer = Offer::find($request->id);
         $data = $request->validated();
-        // return $data;
+
         if ($request->hasFile('image')) {
-            if (!empty($offer->image) && Storage::exists($offer->image)) {
+            if (!empty($offer->image) && Storage::disk('public')->exists($offer->image)) 
+            {
                 Storage::disk('public')->delete($offer->image);
             }
-            $data['image'] = $request->file('image')->store('photo');
-        } else {
-            unset($data['image']);
+            $data['image'] = request()->file('image')->store('photo', 'public');
         }
-        $offer->update($data);
+
+        $offer->update($data); // تحديث النموذج بالبيانات الجديدة
+
+
     
         session()->flash('edit', 'تم تحديث العرض بنجاح');
         return redirect()->back();
@@ -118,20 +120,11 @@ class OfferController extends Controller
     public function destroy(Request $request)
     {
         $offer = offer::findOrFail($request->id);
-
-        // Check if the product has an image and delete it
-        if ($offer->image) {
-            // Assuming the images are stored in 'storage/app/public/shops'
-            $filePath = $offer->image;        
-            if (Storage::disk('public')->exists($filePath)) {
-                Storage::disk('public')->delete($filePath);
-            }
+        if (!empty($offer->image) && Storage::disk('public')->exists($offer->image)) 
+        {
+            Storage::disk('public')->delete($offer->image);
         }
-
-        // Delete the product record from the database
         $offer->delete();
-
-        // Flash a success message and redirect back
         session()->flash('delete', 'تم حذف المنتج بنجاح');
         return redirect()->back();
     }

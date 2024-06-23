@@ -42,7 +42,7 @@ class ProdectController extends Controller
     public function store(checkprodect $request)
     {
         $data = $request->validated();
-        $data['image'] = request()->file('image')->store('photo');
+        $data['image'] = request()->file('image')->store('photo', 'public');
         $prodect = prodect::create($data);
 
         Session()->flash('Add', 'تم اضافة المنتج بنجاح');
@@ -73,15 +73,13 @@ class ProdectController extends Controller
     {
     $prodect = prodect::find($request->id);
     $data = $request->validated();
-    // return $data;
-    if ($request->hasFile('image')) {
-        if (!empty($prodect->image) && Storage::exists($prodect->image)) {
+    if($request->hasFile('image')){
+        if (!empty($prodect->image) && Storage::disk('public')->exists($prodect->image)) {
             Storage::disk('public')->delete($prodect->image);
         }
-        $data['image'] = $request->file('image')->store('photo');
-    } else {
+        $data['image'] = $request->file('image')->store('photo', 'public');
+    }else{
         unset($data['image']);
-        // return 'fff';
     }
     $prodect->update($data);
 
@@ -96,17 +94,9 @@ class ProdectController extends Controller
 public function destroy(Request $request, string $id)
 {   
     $prodect = prodect::findOrFail($request->id);
-
-    // Check if the product has an image and delete it
-    if ($prodect->image) {
-        // Assuming the images are stored in 'storage/app/public/shops'
-        $filePath = $prodect->image;        
-        if (Storage::disk('public')->exists($filePath)) {
-            Storage::disk('public')->delete($filePath);
-        }
+    if (!empty($prodect->image) && Storage::disk('public')->exists($prodect->image)) {
+        Storage::disk('public')->delete($prodect->image);
     }
-
-    // Delete the product record from the database
     $prodect->delete();
 
     // Flash a success message and redirect back

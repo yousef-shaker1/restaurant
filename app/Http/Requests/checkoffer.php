@@ -22,10 +22,10 @@ class checkoffer extends FormRequest
     public function rules(): array
     {
         return [
-                'name' => 'required|min:2',
-                'description' => 'required|min:5',
-                'price' => 'required',
-                // 'image' => 'required'
-            ];
+            'name' => 'required|min:2',
+            'description' => 'required|min:5',
+            'price' => 'required',
+            // 'image' => 'nullable', // يجعل الصورة اختيارية، وإذا لم يتم إرسالها لن يتم تطبيق أي قواعد
+        ];
     }
 }
