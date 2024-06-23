@@ -104,6 +104,30 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination-wrapper mt-4">
+                            <ul class="pagination justify-content-center">
+                              <!-- زر الصفحة السابقة -->
+                              @if ($orderoffers->onFirstPage())
+                                  <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                              @else
+                                  <li class="page-item"><a href="{{ $orderoffers->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                              @endif
+                      
+                              <!-- أرقام الصفحات -->
+                              @foreach(range(1, $orderoffers->lastPage()) as $page)
+                                  <li class="page-item {{ $page == $orderoffers->currentPage() ? 'active' : '' }}">
+                                      <a href="{{ $orderoffers->url($page) }}" class="page-link">{{ $page }}</a>
+                                  </li>
+                              @endforeach
+                      
+                              <!-- زر الصفحة التالية -->
+                              @if ($orderoffers->hasMorePages())
+                                  <li class="page-item"><a href="{{ $orderoffers->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                              @else
+                                  <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                              @endif
+                          </ul>
+                          </div>
                     </div>
                 </div>
             </div>

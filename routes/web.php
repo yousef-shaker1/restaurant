@@ -31,19 +31,15 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
-Route::get('/', function () {
-    $prodects = prodect::get();
-    $sections = section::get();
-    $offers = offer::get();
-    return view('welcome' , compact('prodects', 'sections', 'offers'));
-})->name('homee');
+Route::get('/', [UserpageController::class, 'index'])->name('homee');
+
 
 Route::get('/login_customer',[CustomerController::class, 'login'])->name('login_customer');
 Route::get('/register_customer',[CustomerController::class, 'register'])->name('register_customer');
 
 Route::resource('/home', UserpageController::class);
 Route::get('/about', [UserpageController::class, 'about'])->name('home.about');
-Route::get('/Previousrequests', [UserpageController::class, 'Previousrequests'])->name('Previous.requests');
+Route::get('/Previousrequests', [UserpageController::class, 'Previousrequests'])->name('Previous.requests')->middleware(['auth']);
 //authntcation 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -71,7 +67,7 @@ Route::controller(OfferController::class)->group(function(){
 
 
 Route::controller(OrderController::class)->group(function(){
-    Route::get('/Basketall', 'Basketall')->name('Basketall');
+    Route::get('/Basketall', 'Basketall')->name('Basketall')->middleware(['auth']);
     Route::get('/delbascet/{id}', 'delbascet')->name('delbascet');
     Route::get('/delbascetprodect/{id}', 'delbascetprodect')->name('delbascetprodect');
     Route::get('/sendorder/{id}', 'sendorder')->name('sendorder');
@@ -103,6 +99,4 @@ Route::get('successoffer', [OrderController::class, 'successoffer'])->name('succ
 Route::get('canceloffer', [OrderController::class, 'canceloffer'])->name('canceloffer');
 
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth:web', 'verified', 'IsAdmin'])->name('admin.dashboard');
+Route::get('/admin/dashboard',[OrderController::class, 'adminpage'])->middleware(['auth:web', 'verified', 'IsAdmin'])->name('admin.dashboard');

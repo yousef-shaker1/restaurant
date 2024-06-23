@@ -107,7 +107,7 @@
                                         @can('تعديل المنتجات')
                                             <a class="modal-effect btn btn-sm btn-info custom-btn edit-button"
                                                 data-effect="effect-scale" data-id="{{ $prodect->id }}"
-                                                data-name="{{ $prodect->name }}"
+                                                dta-name="{{ $prodect->name }}"
                                                 data-image="{{ Storage::url($prodect->image) }}"
                                                 data-description="{{ $prodect->description }}"
                                                 data-price="{{ $prodect->price }}"
@@ -129,6 +129,30 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination-wrapper mt-4">
+                        <ul class="pagination justify-content-center">
+                          <!-- زر الصفحة السابقة -->
+                          @if ($prodects->onFirstPage())
+                              <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                          @else
+                              <li class="page-item"><a href="{{ $prodects->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                          @endif
+                  
+                          <!-- أرقام الصفحات -->
+                          @foreach(range(1, $prodects->lastPage()) as $page)
+                              <li class="page-item {{ $page == $prodects->currentPage() ? 'active' : '' }}">
+                                  <a href="{{ $prodects->url($page) }}" class="page-link">{{ $page }}</a>
+                              </li>
+                          @endforeach
+                  
+                          <!-- زر الصفحة التالية -->
+                          @if ($prodects->hasMorePages())
+                              <li class="page-item"><a href="{{ $prodects->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                          @else
+                              <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                          @endif
+                      </ul>
+                      </div>
                 </div>
             </div>
         </div>

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Stripe\Charge;
-use Stripe\Customer as Costomer;
 use Stripe\Stripe;
-use Stripe\Checkout\Session;
 use App\Models\offer;
 use App\Models\order;
 use App\Models\basket;
@@ -13,8 +11,12 @@ use App\Models\prodect;
 use App\Models\customer;
 use App\Models\orderoffer;
 use App\Models\basketoffer;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Stripe\Customer as Costomer;
+use Illuminate\Support\Facades\Auth;
+use ConsoleTVs\Charts\Facades\Charts; 
+
 class OrderController extends Controller
 {
     function __construct()
@@ -29,7 +31,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::get();
+        $orders = order::paginate(10);
         return view('admin.orders', compact('orders'));
     }
 
@@ -92,15 +94,10 @@ class OrderController extends Controller
 
     public function Basketall()
     {
-        if (!empty(Auth::user()->email)){
-            $customer = customer::where('email' , Auth::user()->email)->first();
-            $baskets = basket::where('customer_id', $customer->id)->get();
-            $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
-            return view('user.basketall', compact('baskets', 'basketsoffer'));
-        } else {
-            session()->flash('login', 'يرجي تسجيل الدخول اولا');
-            return redirect()->back();  
-        }
+        $customer = customer::where('email' , Auth::user()->email)->first();
+        $baskets = basket::where('customer_id', $customer->id)->get();
+        $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
+        return view('user.basketall', compact('baskets', 'basketsoffer'));
     }
     
 
@@ -122,29 +119,7 @@ class OrderController extends Controller
     
     
     
-    //====================
-    
-// public function okorder(Request $request, $id)
-// {
-//     $date = $request->input('date');
-//     $time = $request->input('time');
-//     $count = $request->input('count');
 
-//     order::create([
-//         'customer_id' => $customer->id,
-//         'birthdate' => $date,
-//         'time' => $time,
-//         'prodect_id' => $id,
-//         'count' => $count,
-//     ]);
-
-//     session()->flash('Add', 'تم عمل الاوردر بنجاح يتم مراجعة الطلب الان');
-//     return redirect()->back();
-// }
-    
-    
-    
-    
     
     //====================
     public function okorderoffer(Request $request){
@@ -222,16 +197,53 @@ class OrderController extends Controller
     }
 
     public function acceptedshow(){
-        $orders = order::where('status', 'قبول')->get();
+        $orders = order::where('status', 'قبول')->paginate(9);
         return view('admin.orderaccept', compact('orders'));
     }
 
     public function Orderrejected(){
-        $orders = order::where('status', 'رفض')->get();
+        $orders = order::where('status', 'رفض')->paginate(9);
         return view('admin.Orderrejected', compact('orders'));
     }
     public function Ordercompleted(){
-        $orders = order::where('status', 'اتمام')->get();
+        $orders = order::where('status', 'اتمام')->paginate(9);
         return view('admin.Ordercompleted', compact('orders'));
     }
+
+    public function adminpage()
+    {
+        $chartjs1 = app()->chartjs
+            ->name('ordersPieChart')
+            ->type('pie')
+            ->size(['width' => 400, 'height' => 400])
+            ->labels(['Order product', 'Order clothing'])
+            ->datasets([
+                [
+                    'backgroundColor' => ['#FF6384', '#36A2EB'],
+                    'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                    'data' => [order::count(), orderoffer::count()]
+                ]
+            ])
+            ->options([]);
+
+        // إعداد البيانات للشارت الثاني (Bar Chart)
+        $orderRejected = order::where('status', 'رفض')->count() + orderoffer::where('status', 'رفض')->count();
+        $Acceptorder = order::where('status', 'قبول')->count() + orderoffer::where('status', 'قبول')->count();
+        $ordercomplate = order::where('status', 'اتمام')->count() + orderoffer::where('status', 'اتمام')->count();
+        
+        $chartjs2 = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 400])
+            ->labels(['الاوردرات المرفوضة', 'الاوردرات المقبولة', 'الاوردرات التي تمت'])
+            ->datasets([
+                [
+                    'backgroundColor' => ['#B22222', '#4169E1', '#00FF7F'],
+                    'data' => [$orderRejected, $Acceptorder, $ordercomplate]
+                ]
+            ])
+            ->options([]);
+        return view('admin.index', compact('chartjs1', 'chartjs2'));
+    }
+    
 }

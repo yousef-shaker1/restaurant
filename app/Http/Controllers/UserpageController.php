@@ -18,7 +18,10 @@ class UserpageController extends Controller
      */
     public function index()
     {
-     //
+        $prodects = prodect::paginate(10);
+        $sections = section::all();
+        $offers = offer::all();
+        return view('welcome' , compact('prodects', 'sections', 'offers'));
     }
      
     public function about()
@@ -36,23 +39,20 @@ class UserpageController extends Controller
      */
     public function create()
     {
-        $prodects = prodect::get();
+        $prodects = prodect::paginate(10);
         $sections = section::get();
         return view('user.menu', compact('prodects', 'sections'));
         //
     }
     
     public function Previousrequests(){
-        if (!empty(Auth::user()->id)){
-            $customer = customer::where('email' , Auth::user()->email)->first();
-            $orders = order::where('customer_id', $customer->id)->get();
-            $offers = orderoffer::where('customer_id', $customer->id)->get();
-            return view('user.Previousrequests', compact('orders', 'offers'));
-        } else {
-            session()->flash('login', 'يرجي تسجيل الدخول اولا');
-            return redirect()->back();    
-        }
+        $customer = customer::where('email' , Auth::user()->email)->first();
+        $orders = order::where('customer_id', $customer->id)->get();
+        $offers = orderoffer::where('customer_id', $customer->id)->get();
+        return view('user.Previousrequests', compact('orders', 'offers'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.

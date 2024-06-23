@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Restaurant Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,6 +70,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row g-3">
+                <div class="col-md-12 col-lg-6 col-xl-6"> <!-- Adjusted column sizes for larger screens -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-transparent">
+                            <h4 class="card-title mb-0">نسبة الاوردرات</h4>
+                        </div>
+                        <div style="max-width: 600px; margin: auto;"> <!-- Adjusted max-width for larger charts -->
+                            {{ $chartjs1->render() }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-6"> <!-- Adjusted column sizes for larger screens -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-transparent">
+                            <h4 class="card-title mb-0">نسبة الفواتير</h4> <!-- Adjusted title for the second chart -->
+                        </div>
+                        <div style="max-width: 600px; margin: auto;"> <!-- Adjusted max-width for larger charts -->
+                            {{ $chartjs2->render() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
 
         

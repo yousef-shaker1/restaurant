@@ -23,7 +23,7 @@ class ProdectController extends Controller
      */
     public function index()
     {
-        $prodects = prodect::get();
+        $prodects = prodect::paginate(10);
         $sections = section::get();
         return view('admin.prodect', compact('prodects', 'sections'));
     }

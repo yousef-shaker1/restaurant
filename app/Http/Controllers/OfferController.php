@@ -26,7 +26,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = offer::get();
+        $offers = offer::paginate(7);
         return view('admin.offer', compact('offers'));
     }
     
@@ -35,7 +35,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $orderoffers = orderoffer::get();
+        $orderoffers = orderoffer::paginate(7);
         return view('admin.orderoffer', compact('orderoffers'));
     }
     
@@ -86,7 +86,7 @@ class OfferController extends Controller
     }
     public function showuser()
     {
-        $offers = offer::get();
+        $offers = offer::paginate(5);
         return view('user.offer', compact('offers'));
     }
     

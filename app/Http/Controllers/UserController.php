@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use DB;
 use Hash;
 use App\Models\User;
+use App\Models\order;
 use App\Models\customer;
 use Illuminate\View\View;
+use App\Models\orderoffer;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -47,6 +49,7 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
     }
+
     
     /**
      * Store a newly created resource in storage.
@@ -71,7 +74,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+        ->with('success','User created successfully');
     }
     
     /**

@@ -193,9 +193,7 @@
 <section class="food_section layout_padding-bottom">
   <div class="container">
     <div class="heading_container heading_center">
-      <h2>
-        كل الوجبات
-      </h2>
+      <h2>كل الوجبات</h2>
     </div>
     <ul class="filters_menu">
       <li class="active" data-filter="*" onclick="showSection('all')">All</li>
@@ -241,10 +239,30 @@
         </div>
         @endforeach
       </div>
-    </div>
-
-    <div class="btn-box">
-      <a href="#">View More</a>
+      <div class="pagination-wrapper mt-4">
+        <ul class="pagination justify-content-center">
+          <!-- زر الصفحة السابقة -->
+          @if ($prodects->onFirstPage())
+              <li class="page-item disabled"><span class="page-link">السابق</span></li>
+          @else
+              <li class="page-item"><a href="{{ $prodects->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+          @endif
+  
+          <!-- أرقام الصفحات -->
+          @foreach(range(1, $prodects->lastPage()) as $page)
+              <li class="page-item {{ $page == $prodects->currentPage() ? 'active' : '' }}">
+                  <a href="{{ $prodects->url($page) }}" class="page-link">{{ $page }}</a>
+              </li>
+          @endforeach
+  
+          <!-- زر الصفحة التالية -->
+          @if ($prodects->hasMorePages())
+              <li class="page-item"><a href="{{ $prodects->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+          @else
+              <li class="page-item disabled"><span class="page-link">التالي</span></li>
+          @endif
+      </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -407,20 +425,32 @@
   @section('js')
   <script>
     function showSection(sectionName) {
-      // إخفاء جميع عناصر البيانات
-      var allProducts = document.querySelectorAll('.grid .col-sm-6');
-      allProducts.forEach(function(product) {
-        product.style.display = 'none';
-      });
-  
-      // عرض بيانات القسم المحدد
-      var selectedSectionProducts = document.querySelectorAll('.grid .col-sm-6.' + sectionName);
-      selectedSectionProducts.forEach(function(product) {
-        product.style.display = 'block';
-      });
-    }
-  </script>
+    // إخفاء جميع عناصر البيانات
+    var allProducts = document.querySelectorAll('.grid .col-sm-6');
+    allProducts.forEach(function(product) {
+      product.style.display = 'none';
+    });
 
+    // عرض بيانات القسم المحدد
+    var selectedSectionProducts = document.querySelectorAll('.grid .col-sm-6.' + sectionName);
+    selectedSectionProducts.forEach(function(product) {
+      product.style.display = 'block';
+    });
+
+    // تحديث حالة التصفية النشطة
+    var filters = document.querySelectorAll('.filters_menu li');
+    filters.forEach(function(filter) {
+      filter.classList.remove('active');
+    });
+
+    document.querySelector('.filters_menu li[data-filter=".' + sectionName + '"]').classList.add('active');
+  }
+
+  // عرض جميع المنتجات عند تحميل الصفحة لأول مرة
+  document.addEventListener('DOMContentLoaded', function() {
+    showSection('all');
+  });
+  </script>
   
   @endsection
 
