@@ -18,7 +18,10 @@ class UserpageController extends Controller
      */
     public function index()
     {
-     //
+        $prodects = prodect::paginate(9);
+        $sections = section::get();
+        $offers = offer::get();
+        return view('welcome' , compact('prodects', 'sections', 'offers'));
     }
      
     public function about()
@@ -48,10 +51,42 @@ class UserpageController extends Controller
             $orders = order::where('customer_id', $customer->id)->get();
             $offers = orderoffer::where('customer_id', $customer->id)->get();
             return view('user.Previousrequests', compact('orders', 'offers'));
-        } else {
-            session()->flash('login', 'يرجي تسجيل الدخول اولا');
-            return redirect()->back();    
         }
+    }
+
+
+    public function dashboard(){
+        $chartjs1 = app()->chartjs
+        ->name('ordersPieChart')
+        ->type('pie')
+        ->size(['width' => 300, 'height' => 400]) // تعديل الحجم ليكون أكبر
+        ->labels(['Order product', 'Order offer'])
+        ->datasets([
+            [
+                'backgroundColor' => ['#FF6384', '#36A2EB'],
+                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                'data' => [order::count(), orderoffer::count()] // تعديل القيم بناءً على عدد الأوامر
+            ]
+            ])
+        ->options([]);
+
+    $orderRejected = order::where('status', 'رفض')->count() + orderoffer::where('status', 'رفض')->count(); 
+    $Acceptorder = order::where('status', 'قبول')->count() + orderoffer::where('status', 'قبول')->count(); 
+    $ordercomplate = order::where('status', 'اتمام')->count() + orderoffer::where('status', 'اتمام')->count(); 
+    $chartjs2 = app()->chartjs
+    ->name('barChartTest')
+    ->type('bar')
+    ->size(['width' => 450, 'height' => 300])
+    ->labels(['الاوردرات المرفوضة', 'الاوردرات المقبولة', 'الاوردات التي تمت'])
+    ->datasets([
+        [
+            "label" => "أحوال الطلبات",
+            'backgroundColor' => ['#B22222', '#4169E1', '#00FF7F'],
+            'data' => [$orderRejected, $Acceptorder, $ordercomplate]
+        ]
+    ])
+    ->options([]);
+        return view('admin.index', compact('chartjs1', 'chartjs2'));
     }
 
     /**

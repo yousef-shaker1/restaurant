@@ -97,10 +97,7 @@ class OrderController extends Controller
             $baskets = basket::where('customer_id', $customer->id)->get();
             $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
             return view('user.basketall', compact('baskets', 'basketsoffer'));
-        } else {
-            session()->flash('login', 'يرجي تسجيل الدخول اولا');
-            return redirect()->back();  
-        }
+        } 
     }
     
 
