@@ -94,10 +94,19 @@ class OrderController extends Controller
 
     public function Basketall()
     {
+<<<<<<< HEAD
         $customer = customer::where('email' , Auth::user()->email)->first();
         $baskets = basket::where('customer_id', $customer->id)->get();
         $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
         return view('user.basketall', compact('baskets', 'basketsoffer'));
+=======
+        if (!empty(Auth::user()->email)){
+            $customer = customer::where('email' , Auth::user()->email)->first();
+            $baskets = basket::where('customer_id', $customer->id)->get();
+            $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
+            return view('user.basketall', compact('baskets', 'basketsoffer'));
+        } 
+>>>>>>> test
     }
     
 

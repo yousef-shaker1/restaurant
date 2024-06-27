@@ -6,16 +6,13 @@
 @endsection
 @section('css')
 
+@livewireStyles
 @endsection
 
 
 
 @section('content')
-{{-- <div class="hero_area">
-  <div class="bg-box">
-    <img src="{{ asset('assets/images/hero-bg.jpg') }}" alt="">
-  </div>
-</div> --}}
+
 @if (session()->has('login'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>{{ session()->get('login') }}</strong>
@@ -190,6 +187,7 @@
 @endif
 
 <!-- food section -->
+<<<<<<< HEAD
 <section class="food_section layout_padding-bottom">
   <div class="container">
     <div class="heading_container heading_center">
@@ -267,6 +265,9 @@
   </div>
 </section>
 
+=======
+<livewire:productsPaginate  /> 
+>>>>>>> test
 
 
 <!-- end food section -->
@@ -423,6 +424,7 @@
   
   
   @section('js')
+<<<<<<< HEAD
   <script>
     function showSection(sectionName) {
     // إخفاء جميع عناصر البيانات
@@ -430,6 +432,10 @@
     allProducts.forEach(function(product) {
       product.style.display = 'none';
     });
+=======
+  @livewireScripts
+  
+>>>>>>> test
 
     // عرض بيانات القسم المحدد
     var selectedSectionProducts = document.querySelectorAll('.grid .col-sm-6.' + sectionName);

@@ -31,8 +31,12 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
-Route::get('/', [UserpageController::class, 'index'])->name('homee');
-
+Route::get('/', function () {
+    $prodects = prodect::get();
+    $sections = section::get();
+    $offers = offer::get();
+    return view('welcome' , compact('prodects', 'sections', 'offers'));
+})->name('homee');
 
 Route::get('/login_customer',[CustomerController::class, 'login'])->name('login_customer');
 Route::get('/register_customer',[CustomerController::class, 'register'])->name('register_customer');
@@ -99,4 +103,6 @@ Route::get('successoffer', [OrderController::class, 'successoffer'])->name('succ
 Route::get('canceloffer', [OrderController::class, 'canceloffer'])->name('canceloffer');
 
 
-Route::get('/admin/dashboard',[OrderController::class, 'adminpage'])->middleware(['auth:web', 'verified', 'IsAdmin'])->name('admin.dashboard');
+Route::get('/admin/dashboard', function () {
+    return view('admin.index');
+})->middleware(['auth:web', 'verified', 'IsAdmin'])->name('admin.dashboard');

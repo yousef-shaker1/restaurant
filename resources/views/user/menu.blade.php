@@ -13,6 +13,7 @@
     </button>
 </div>
 @endif
+<<<<<<< HEAD
 
 <!-- food section -->
 <section class="food_section layout_padding-bottom">
@@ -129,4 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
   showSection('all');
 });
 </script>
+=======
+<livewire:productsPaginate  /> 
+@endsection
+
+@section('js')
+
+>>>>>>> test
 @endsection

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+
         body {
             font-family: Arial, sans-serif;
         }
@@ -93,6 +94,28 @@
                 </div>
             </div>
             
+        </div>
+        <div class="row g-3">
+            <div class="col-md-12 col-lg-12 col-xl-7">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+                        <h4 class="card-title mb-0">نسبة الاوردرات</h4>
+                    </div>
+                    <div style="max-width: 400px; margin: auto;">
+                        {{ $chartjs1->render() }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-5">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+                        <label class="main-content-label">الاوردرات</label>
+                    </div>
+                    <div style="max-width: 900px; margin: auto;">
+                        {{ $chartjs2->render() }}
+                    </div>
+                </div>
+            </div>
         </div>
 
         
