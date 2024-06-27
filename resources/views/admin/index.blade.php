@@ -72,53 +72,28 @@
                 </div>
             </div>
             <div class="row g-3">
-                <div class="col-md-12 col-lg-6 col-xl-6"> <!-- Adjusted column sizes for larger screens -->
+                <div class="col-md-12 col-lg-12 col-xl-7">
                     <div class="card mb-3">
                         <div class="card-header bg-transparent">
                             <h4 class="card-title mb-0">نسبة الاوردرات</h4>
                         </div>
-                        <div style="max-width: 600px; margin: auto;"> <!-- Adjusted max-width for larger charts -->
+                        <div style="max-width: 400px; margin: auto;">
                             {{ $chartjs1->render() }}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-6 col-xl-6"> <!-- Adjusted column sizes for larger screens -->
+                <div class="col-lg-12 col-xl-5">
                     <div class="card mb-3">
                         <div class="card-header bg-transparent">
-                            <h4 class="card-title mb-0">نسبة الفواتير</h4> <!-- Adjusted title for the second chart -->
+                            <label class="main-content-label">الاوردرات</label>
                         </div>
-                        <div style="max-width: 600px; margin: auto;"> <!-- Adjusted max-width for larger charts -->
+                        <div style="max-width: 900px; margin: auto;">
                             {{ $chartjs2->render() }}
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-        <div class="row g-3">
-            <div class="col-md-12 col-lg-12 col-xl-7">
-                <div class="card mb-3">
-                    <div class="card-header bg-transparent">
-                        <h4 class="card-title mb-0">نسبة الاوردرات</h4>
-                    </div>
-                    <div style="max-width: 400px; margin: auto;">
-                        {{ $chartjs1->render() }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-xl-5">
-                <div class="card mb-3">
-                    <div class="card-header bg-transparent">
-                        <label class="main-content-label">الاوردرات</label>
-                    </div>
-                    <div style="max-width: 900px; margin: auto;">
-                        {{ $chartjs2->render() }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
     </div>
 
     <!-- Bootstrap JS and dependencies -->
