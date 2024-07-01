@@ -10,6 +10,7 @@ use App\Http\Controllers\api\BasketController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\SectionController;
 use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\OrderOfferController;
 use App\Http\Controllers\api\BasketoffersController;
 
 /*
@@ -77,5 +78,12 @@ Route::put('/order/success/{id}',[OrderController::class, 'success']);
 Route::put('/order/rejection/{id}',[OrderController::class, 'rejection']);
 Route::put('/order/completed/{id}',[OrderController::class, 'completed']);
 Route::delete('/order/{id}',[OrderController::class, 'delete']);
+
+Route::get('/orderoffer',[OrderOfferController::class, 'index']);
+Route::get('/orderoffer/show/{id}',[OrderOfferController::class, 'show']);
+Route::put('/orderoffer/success/{id}',[OrderOfferController::class, 'success']);
+Route::put('/orderoffer/rejection/{id}',[OrderOfferController::class, 'rejection']);
+Route::put('/orderoffer/completed/{id}',[OrderOfferController::class, 'completed']);
+Route::delete('/orderoffer/{id}',[OrderOfferController::class, 'delete']);
 
 });
