@@ -94,19 +94,10 @@ class OrderController extends Controller
 
     public function Basketall()
     {
-<<<<<<< HEAD
-        $customer = customer::where('email' , Auth::user()->email)->first();
-        $baskets = basket::where('customer_id', $customer->id)->get();
-        $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
-        return view('user.basketall', compact('baskets', 'basketsoffer'));
-=======
-        if (!empty(Auth::user()->email)){
-            $customer = customer::where('email' , Auth::user()->email)->first();
-            $baskets = basket::where('customer_id', $customer->id)->get();
-            $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
-            return view('user.basketall', compact('baskets', 'basketsoffer'));
-        } 
->>>>>>> test
+    $customer = customer::where('email' , Auth::user()->email)->first();
+    $baskets = basket::where('customer_id', $customer->id)->get();
+    $basketsoffer = basketoffer::where('customer_id', $customer->id)->get();
+    return view('user.basketall', compact('baskets', 'basketsoffer'));
     }
     
 
@@ -166,13 +157,14 @@ class OrderController extends Controller
             'count' => $count,
         ]);
         
+        basketoffer::where('offer_id', $request->id)->where('customer_id', $customer->id)->delete();
         return redirect()->away($session->url);
     }
 
 
     public function successoffer(Request $request)
     {
-        session()->flash('Add', 'تم عمل الدفع بنجاح، يتم مراجعة الطلب الآن.');
+        session()->flash('Add', 'تم عمل الدفع بنجاح، يتم مراجعة الطلب الآن');
         return redirect()->back();
     }
     

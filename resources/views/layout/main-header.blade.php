@@ -36,6 +36,41 @@
 .auth_links a:hover {
   background-color: rgba(255, 255, 255, 0.1); /* لون الخلفية عند التمرير */
 }
+.user_option {
+    position: relative;
+}
+.main-header-notification {
+    position: absolute;
+    top: 3px; 
+    left: -25px; 
+}
+
+.notification-badge {
+    position: absolute;
+    top: -10px; /* تعديل هذه القيمة حسب الحاجة */
+    right: 0;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* تكبير عرض القائمة المنسدلة */
+.dropdown-menu {
+    width: 350px; /* تعديل العرض حسب الحاجة */
+}
+
+.main-notification-list.Notification-scroll {
+    max-height: 300px; /* تعديل الارتفاع حسب الحاجة */
+    overflow-y: auto;
+}
+.order_online {
+    background-color: orange;
+    color: white; 
+    border: none; 
+    padding: 10px 50px;
+    font-size: 16px;
+   
+}
 
   </style>
 @yield('css')

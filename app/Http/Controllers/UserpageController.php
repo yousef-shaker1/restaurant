@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\offer;
 use App\Models\order;
 use App\Models\prodect;
@@ -9,6 +10,7 @@ use App\Models\section;
 use App\Models\customer;
 use App\Models\orderoffer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class UserpageController extends Controller
@@ -97,6 +99,23 @@ class UserpageController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function markasread()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        foreach($user->unreadNotifications as $notificate){
+            $notificate->markAsRead();
+        }
+        return redirect()->back();
+    }
+
+    public function show_single_product($id)
+    {
+        $prodect = prodect::where('id', $id)->first();
+        $get_id = DB::table('notifications')->where('data->pro_id', $id)->where('notifiable_id', Auth::user()->id)->pluck('id');
+        DB::table('notifications')->where('id', $get_id)->update(['read_at' => now()]);
+        return view('user.showmenu', compact('prodect'));
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Charge;
 use Stripe\Stripe;
 use App\Models\order;
+use App\Models\basket;
 use App\Models\prodect;
 use App\Models\customer;
 use Illuminate\Http\Request;
@@ -56,13 +57,14 @@ class StripeController extends Controller
         'prodect_id' => $request->id,
         'count' => $count,
     ]);
+    basket::where('prodect_id', $request->id)->where('customer_id', $customer->id)->delete();
     
     return redirect()->away($session->url);
 
 }
     public function successtransaction(Request $request)
     {
-        session()->flash('Add', 'تم عمل الدفع بنجاح، يتم مراجعة الطلب الآن.');
+        session()->flash('Add', 'تم عمل الدفع بنجاح، يتم مراجعة الطلب الآن');
         return redirect()->back();
     }
     

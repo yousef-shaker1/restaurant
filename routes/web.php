@@ -39,6 +39,8 @@ Route::get('/register_customer',[CustomerController::class, 'register'])->name('
 Route::resource('/home', UserpageController::class);
 Route::get('/about', [UserpageController::class, 'about'])->name('home.about');
 Route::get('/Previousrequests', [UserpageController::class, 'Previousrequests'])->name('Previous.requests')->middleware(['auth']);
+Route::get('/markasread', [UserpageController::class, 'markasread'])->name('notification.markall');
+Route::get('/show_single_product/{id}', [UserpageController::class, 'show_single_product'])->name('show_single_product');
 //authntcation 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
