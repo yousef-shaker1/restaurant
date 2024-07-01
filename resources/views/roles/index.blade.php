@@ -48,9 +48,9 @@ roles
           <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
           @endcan
           @can('حذف الصلاحية')
-              {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                  {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-              {!! Form::close() !!}
+              {{ Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) }}
+                  {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+              {{ Form::close() }}
           @endcan
       </td>
   </tr>
@@ -58,7 +58,7 @@ roles
 </table>
 
 
-{!! $roles->render() !!}
+{{ $roles->render() }}
 
 
 <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>

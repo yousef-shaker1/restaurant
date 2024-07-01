@@ -59,9 +59,9 @@ users
     <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
     @endcan
     @can('حذف المستخدمين')
-    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
+    {{ Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) }}
+    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+    {{ Form::close() }}
     @endcan
   </td>
 </tr>
@@ -69,7 +69,7 @@ users
 </table>
 
 
-{!! $data->render() !!}
+{{ $data->render() }}
 
 
 <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>

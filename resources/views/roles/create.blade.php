@@ -35,7 +35,7 @@
 
 
 
-{!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+{{ Form::open(array('route' => 'roles.store','method'=>'POST')) }}
 <!-- row -->
 <div class="row">
     <div class="col-md-12">
@@ -45,7 +45,7 @@
                     <div class="col-xs-7 col-sm-7 col-md-7">
                         <div class="form-group">
                             <p>اسم الصلاحية :</p>
-                            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                            {{ Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) }}
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
 </div>
 <!-- main-content closed -->
 
-{!! Form::close() !!}
+{{ Form::close() }}
 
 
 <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>

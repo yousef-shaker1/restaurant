@@ -36,7 +36,7 @@
 
 
 
-{!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+{{ Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) }}
 <!-- row -->
 <div class="row">
     <div class="col-md-12">
@@ -45,7 +45,7 @@
                 <div class="main-content-label mg-b-5">
                     <div class="form-group">
                         <p>اسم الصلاحية :</p>
-                        {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                        {{ Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) }}
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +80,7 @@
 <!-- Container closed -->
 </div>
 <!-- main-content closed -->
-{!! Form::close() !!}
+{{ Form::close() }}
 
 @endsection
 
