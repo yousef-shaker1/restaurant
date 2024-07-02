@@ -12,7 +12,7 @@ use App\Http\Controllers\api\SectionController;
 use App\Http\Controllers\api\CustomerController;
 use App\Http\Controllers\api\OrderOfferController;
 use App\Http\Controllers\api\BasketoffersController;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -68,9 +68,11 @@ Route::delete('/offer/{id}',[OfferController::class, 'delete']);
 
 Route::get('/basket',[BasketController::class, 'index']);
 Route::get('/basket/show/{id}',[BasketController::class, 'show']);
+Route::delete('/basket/delete/{id}',[BasketController::class, 'delete']);
 
 Route::get('/basketoffers',[BasketoffersController::class, 'index']);
 Route::get('/basketoffers/show/{id}',[BasketoffersController::class, 'show']);
+Route::delete('/basketoffers/delete/{id}',[BasketoffersController::class, 'delete']);
 
 Route::get('/order',[OrderController::class, 'index']);
 Route::get('/order/show/{id}',[OrderController::class, 'show']);

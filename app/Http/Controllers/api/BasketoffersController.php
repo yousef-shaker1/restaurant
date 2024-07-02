@@ -24,4 +24,13 @@ class BasketoffersController extends Controller
         }
         return $this->apiResponse($basket, 'ok', 200);
     }
+
+    public function delete($id) {
+        $basket =  BasketoffersResource::collection(basketoffer::where('customer_id', $id)->get());
+        if ($basket->isEmpty()) {
+            return $this->apiResponse(null, 'customer_id not found product', 404);
+        }
+        basketoffer::where('customer_id', $id)->delete();
+        return $this->apiResponse(null, 'delete basket susseccfully', 200);
+    }
 }
