@@ -3,73 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login - resturant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
+            font-family: Arial, sans-serif;
             background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center center fixed;
             background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .container {
-            max-width: 600px;
-            margin-top: 100px;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+        .login-container {
+            background: rgba(255, 255, 255, 0.5); /* Set transparency here */
+            padding: 84px;
+    border-radius: 42px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 379px;
+            text-align: center;
         }
-        .form-group label {
-            font-weight: bold;
-        }
-        .btn-primary {
-            background-color: #d9534f;
-            border-color: #d43f3a;
-        }
-        .btn-secondary {
-            background-color: #5bc0de;
-            border-color: #46b8da;
+        .login-container h2 {
             margin-bottom: 20px;
         }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: #4e0efd;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #0051ff;
+        }
+        .login-container a {
+            color: #4e0efd;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            background-color: #fcbabf;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .error ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .error li {
+            margin-bottom: 5px;
+        }
     </style>
+    @livewireStyles
 </head>
 <body>
-    <div class="container">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-      @endif
-      @if (Session()->has('error'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>{{ Session()->get('error') }}</strong>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-    @endif  
-        <h2 class="text-center">Login</h2>
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name='email' id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name='password' id="password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block"> {{ __('Log in') }} </button>
-        </form>
-    </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @livewire('Login')
+    @livewireScripts
 </body>
 </html>
