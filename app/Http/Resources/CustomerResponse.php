@@ -18,7 +18,6 @@ class CustomerResponse extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
             'phone' => $this->phone,
             'birthdate' => $this->birthdate,
             'address' => $this->address,
