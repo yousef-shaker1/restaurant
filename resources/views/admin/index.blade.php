@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row g-3 custom-card-container">
+            <div class="row g-10 custom-card-container">
                 <div class="col-md-12 col-lg-12 col-xl-6 custom-card">
                     <div class="card mb-3">
                         <div class="card-header bg-transparent">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-xl-6 custom-card">
+                <div class="col-md-20 col-lg-18 col-xl-6 custom-card">
                     <div class="card mb-3">
                         <div class="card-header bg-transparent">
                             <label class="main-content-label">الاوردرات</label>
@@ -94,18 +94,6 @@
                     </div>
                 </div>
             </div>
-            
-            
-                {{-- <div class="col-lg-12 col-xl-5">
-                    <div class="card mb-3">
-                        <div class="card-header bg-transparent" >
-                            <label class="main-content-label">الاوردرات</label>
-                        </div>
-                        <div style="max-width: 900px; margin: auto;">
-                            {{ $chartjs2->render() }}
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>

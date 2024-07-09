@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\offer;
 use App\Models\order;
+use App\Models\tables;
 use App\Models\prodect;
 use App\Models\section;
 use App\Models\customer;
 use App\Models\orderoffer;
+use App\Http\Requests\table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -30,15 +32,7 @@ class UserpageController extends Controller
     {
         return view('user.about');
     }
-    
-    // public function index()
-    // {
-        //     return view('user.menu');
-        // }
-        
-        /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $prodects = prodect::paginate(10);
@@ -61,13 +55,13 @@ class UserpageController extends Controller
         $chartjs1 = app()->chartjs
         ->name('ordersPieChart')
         ->type('pie')
-        ->size(['width' => 300, 'height' => 400]) // تعديل الحجم ليكون أكبر
+        ->size(['width' => 300, 'height' => 400]) 
         ->labels(['Order product', 'Order offer'])
         ->datasets([
             [
                 'backgroundColor' => ['#FF6384', '#36A2EB'],
                 'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
-                'data' => [order::count(), orderoffer::count()] // تعديل القيم بناءً على عدد الأوامر
+                'data' => [order::count(), orderoffer::count()]
             ]
             ])
         ->options([]);
@@ -78,7 +72,7 @@ class UserpageController extends Controller
     $chartjs2 = app()->chartjs
     ->name('barChartTest')
     ->type('bar')
-    ->size(['width' => 450, 'height' => 300])
+    ->size(['width' => 1300, 'height' => 900])
     ->labels(['الاوردرات المرفوضة', 'الاوردرات المقبولة', 'الاوردات التي تمت'])
     ->datasets([
         [
@@ -90,8 +84,6 @@ class UserpageController extends Controller
     ->options([]);
         return view('admin.index', compact('chartjs1', 'chartjs2'));
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -116,6 +108,22 @@ class UserpageController extends Controller
         $get_id = DB::table('notifications')->where('data->pro_id', $id)->where('notifiable_id', Auth::user()->id)->pluck('id');
         DB::table('notifications')->where('id', $get_id)->update(['read_at' => now()]);
         return view('user.showmenu', compact('prodect'));
+    }
+
+    public function table_show(){
+        $tables = tables::all();
+        return view('admin.tables', compact('tables'));
+    }
+
+    public function show_users(){
+        $customers = customer::all();
+        return view('admin.customers', compact('customers'));
+    }
+
+    public function delete_table(Request $request,$id){
+        tables::find($request->id)->delete();
+        session()->flash('delete', 'delete table success');
+        return redirect()->back();
     }
 
     /**

@@ -9,6 +9,9 @@
   <!-- font awesome style -->
   <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
 
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   <!-- Custom styles for this template -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
   <!-- responsive style -->

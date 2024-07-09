@@ -38,6 +38,10 @@ Route::get('/register_customer',[CustomerController::class, 'register'])->name('
 
 Route::resource('/home', UserpageController::class);
 Route::get('/about', [UserpageController::class, 'about'])->name('home.about');
+Route::get('/show_users', [UserpageController::class, 'show_users'])->name('show_users');
+Route::get('/table', [UserpageController::class, 'table_user'])->name('table');
+Route::get('/table_show', [UserpageController::class, 'table_show'])->name('table_show');
+Route::delete('/delete_table/{id}', [UserpageController::class, 'delete_table'])->name('delete_table');
 Route::get('/Previousrequests', [UserpageController::class, 'Previousrequests'])->name('Previous.requests')->middleware(['auth']);
 Route::get('/markasread', [UserpageController::class, 'markasread'])->name('notification.markall');
 Route::get('/show_single_product/{id}', [UserpageController::class, 'show_single_product'])->name('show_single_product');

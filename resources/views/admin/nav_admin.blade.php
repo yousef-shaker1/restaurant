@@ -51,14 +51,21 @@
             <a class="nav-link" href="{{ route('order.Ordercompleted') }}">Order completed</a>
         </li>
         @endcan
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('table_show') }}">tables</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('show_users') }}">users</a>
+        </li>
+
             @can('الصلاحيات المستخدمين')
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('roles.index') }}">صلاحيات المستخدمين</a>
+                <a class="nav-link" href="{{ route('roles.index') }}">roles</a>
             </li>
             @endcan
             @can('المستخدمين')
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('users.index') }}">المستخدمين</a>
+                <a class="nav-link" href="{{ route('users.index') }}">admins</a>
             </li>
             @endcan
             <li class="nav-item">
