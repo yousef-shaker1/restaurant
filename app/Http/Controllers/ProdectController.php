@@ -85,7 +85,6 @@ class ProdectController extends Controller
 
     session()->flash('edit', 'تم تحديث المنتج بنجاح');
     return redirect()->back();
-    //  الحصول على المنتج باستخدام ID
     
 }
 /**

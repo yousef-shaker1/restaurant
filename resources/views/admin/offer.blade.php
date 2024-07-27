@@ -18,7 +18,7 @@
 @endsection
 
 @section('title')
-المنتجات
+العروض
 @endsection
 
 @section('con')
@@ -100,11 +100,9 @@
                                             @can('تعديل عرض')
                                             <a class="modal-effect btn btn-sm btn-info custom-btn"
                                                 data-effect="effect-scale" data-id="{{ $offer->id }}"
-                                                data-name="{{ $offer->name }}" data-image="{{ $offer->image }}"
-                                                data-description="{{ $offer->description }}"
-                                                data-price="{{ $offer->price }}"
-                                               data-toggle="modal"
-                                                href="#exampleModal2" title="تعديل">تعديل
+                                                data-name="{{ $offer->name }}" data-image="{{ Storage::url($offer->image) }}"
+                                                data-description="{{ $offer->description }}" data-price="{{ $offer->price }}"
+                                                data-toggle="modal" href="#exampleModal2" title="تعديل">تعديل
                                                 <i class="las la-pen"></i>
                                             </a>
                                             @endcan
@@ -186,50 +184,47 @@
         <!-- End Basic modal -->
     </div>
     <!-- edit -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                
-                <form action="{{ route('offer.update', $i) }}" method="post" autocomplete="off">
-                    @method('PATCH')
-                    @csrf
-                    <div class="form-group">
-                        <input type="hidden" name="id" id="id" value="">
-                            <label for="name">اسم منتج</label>
-                            <input type="text" class="form-control" id="name" name="name">
-                            <label for="name">وصف منتج</label>
-                            <input type="text" class="form-control" id="description" name="description">
-                            <label for="name">سعر المنتج </label>
-                            <input type="text" class="form-control" id="price" name="price">
-                            <label for="section_name">القسم التابع لية</label>
-                            <label for="image">صورة المنتج الحالية</label>
-                            <br>
-                            @if(!empty($offer))
-                            <a href="{{ Storage::url($offer->image) }}"><img src="{{ Storage::url($offer->image) }}" style="width: 80px; height:80px; auto;"> </a>
-                            @endif
-                            <br>
-                            <label for="image">رفع صورة جديدة</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                            <!-- عنصر لعرض اسم الملف المختار -->
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">تاكيد</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+       </div>
+       <div class="modal-body">
+           <form action="{{ route('offer.update', $i) }}" method="post" autocomplete="off">
+               @method('PATCH')
+               @csrf
+               <div class="form-group">
+                   <input type="hidden" name="id" id="id" value="">
+                   <label for="name">اسم منتج</label>
+                   <input type="text" class="form-control" id="name" name="name">
+                   <label for="description">وصف منتج</label>
+                   <input type="text" class="form-control" id="description" name="description">
+                   <label for="price">سعر المنتج</label>
+                   <input type="text" class="form-control" id="price" name="price">
+                   <label for="section_name">القسم التابع له</label>
+                   <label for="current-image">صورة المنتج الحالية</label>
+                   <br>
+                   <img id="current-image" style="width: 80px; height: 80px;">
+                   <br><br>
+                   <input type="hidden" name="current_image" id="current_image">
+                   <label for="image">رفع صورة جديدة</label>
+                   <input type="file" class="form-control" id="image" name="image">
+               </div>
+               <div class="modal-footer">
+                   <button type="submit" class="btn btn-primary">تأكيد</button>
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+               </div>
+           </form>
+       </div>
+   </div>
+</div>
+</div>
 
     <!-- delete -->
     <div class="modal" id="modaldemo9">
@@ -269,27 +264,21 @@
 <!-- تأكد من إضافة سكربتات الجافا سكريبت في نهاية البودي -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        $('#exampleModal2').on('show.bs.modal', function(event) {
-            // الحصول على الزر الذي أطلق الحدث
-            var button = $(event.relatedTarget);
-            // استخراج المعلومات من سمات البيانات
-                var id = button.data('id');
-                var name = button.data('name');
-                var image = button.data('image');
-                var description = button.data('description');
-                var section_id = button.data('section_id');
-                var price = button.data('price');
-                // تحديث محتوى الحقول في النموذج داخل الـ modal
-                var modal = $(this);
-                modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-                // لتحديث عرض الصورة
-                modal.find('.modal-body #image-preview').attr('src', '/photo/' + image);
-                modal.find('.modal-body #description').val(description);
-                modal.find('.modal-body #price').val(price);
-                // لتحديد القسم المناسب
-            });
-        });
+    $('#exampleModal2').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var name = button.data('name');
+        var image = button.data('image');
+        var description = button.data('description');
+        var price = button.data('price');
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #current-image').attr('src', image);
+        modal.find('.modal-body #description').val(description);
+        modal.find('.modal-body #price').val(price);
+    });
+});
 
         $(document).ready(function() {
             $('#modaldemo9').on('show.bs.modal', function(event) {

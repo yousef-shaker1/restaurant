@@ -55,7 +55,7 @@ class OfferController extends Controller
      * Display the specified resource.
      */
     //user page
-    public function show( string $id)
+    public function show(string $id)
     {
         $offer = offer::where('id', $id)->first();
         return view('user.showoffer', compact('offer'));
@@ -96,22 +96,19 @@ class OfferController extends Controller
     //admin page
     public function update(checkoffer $request, string $id)
     {
-        $offer = Offer::find($request->id);
+        $offer = offer::find($request->id);
         $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            if (!empty($offer->image) && Storage::disk('public')->exists($offer->image)) 
-            {
+        if($request->hasFile('image')){
+            if (!empty($offer->image) && Storage::disk('public')->exists($offer->image)) {
                 Storage::disk('public')->delete($offer->image);
             }
-            $data['image'] = request()->file('image')->store('photo', 'public');
+            $data['image'] = $request->file('image')->store('photo', 'public');
+        }else{
+            unset($data['image']);
         }
+        $offer->update($data);
 
-        $offer->update($data); // تحديث النموذج بالبيانات الجديدة
-
-
-    
-        session()->flash('edit', 'تم تحديث العرض بنجاح');
+        session()->flash('edit', 'تم تحديث المنتج بنجاح');
         return redirect()->back();
     }
     /**
