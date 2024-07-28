@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::paginate(10);
+        $orders = order::orderBy('birthdate')->paginate(10);
         return view('admin.orders', compact('orders'));
     }
 

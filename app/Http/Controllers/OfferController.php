@@ -9,6 +9,7 @@ use App\Models\orderoffer;
 use App\Models\basketoffer;
 use Illuminate\Http\Request;
 use App\Http\Requests\checkoffer;
+use App\Http\Requests\updateoffer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,7 +36,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $orderoffers = orderoffer::paginate(7);
+        $orderoffers = orderoffer::orderBy('birthdate')->paginate(7);
         return view('admin.orderoffer', compact('orderoffers'));
     }
     
@@ -94,7 +95,7 @@ class OfferController extends Controller
      * Update the specified resource in storage.
      */
     //admin page
-    public function update(checkoffer $request, string $id)
+    public function update(updateoffer $request, string $id)
     {
         $offer = offer::find($request->id);
         $data = $request->validated();
