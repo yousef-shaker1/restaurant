@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class ProductsPaginate extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
     public $sectionId = null;
