@@ -226,7 +226,6 @@
                                 <option value='{{ $section->id }}'>{{ $section->name }}</option>
                             @endforeach
                         </select>
-
                         <label for="current-image">صورة المنتج الحالية</label>
                         <br>
                         <img id="current-image" style="width: 80px; height:80px;">

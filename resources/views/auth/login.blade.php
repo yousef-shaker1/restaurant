@@ -5,84 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - resturant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center center fixed;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background: rgba(255, 255, 255, 0.5); /* Set transparency here */
-            padding: 84px;
-    border-radius: 42px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 379px;
-            text-align: center;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .login-container button {
-            background-color: #4e0efd;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .login-container button:hover {
-            background-color: #0051ff;
-        }
-        .login-container a {
-            color: #4e0efd;
-            text-decoration: none;
-            display: block;
-            margin-top: 10px;
-        }
-        .login-container a:hover {
-            text-decoration: underline;
-        }
-        .error {
-            background-color: #fcbabf;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-
-        .error ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .error li {
-            margin-bottom: 5px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login_style.css') }}" />
     @livewireStyles
 </head>
 <body>
-    @livewire('Login')
+    <div id="loader" class="loader"></div>
+    @livewire('login')
     @livewireScripts
+    <script>
+        window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    const content = document.querySelector('.content');
+    
+    // إخفاء علامة التحميل عند انتهاء التحميل
+    loader.style.display = 'none';
+    content.style.display = 'block';
+});
+    </script>
 </body>
 </html>

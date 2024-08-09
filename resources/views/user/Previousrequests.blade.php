@@ -38,9 +38,7 @@
                   <table id="example1" class="table key-buttons text-md-nowrap">
                       <thead>
                           <tr>
-                              <th class="border-bottom-0">اسم العميل</th>
-                              <th class="border-bottom-0">تليفون العميل</th>
-                              <th class="border-bottom-0">عنوان العميل</th>
+                              <th class="border-bottom-0">العنوان</th>
                               <th class="border-bottom-0">تاريخ الاودر</th>
                               <th class="border-bottom-0">وقت الاودر</th>
                               <th class="border-bottom-0"> اسم الوجبة</th>
@@ -53,8 +51,6 @@
                       <tbody> 
                           @foreach ($orders as $order)
                           <tr>
-                              <td>{{ $order->customer->name }}</td>
-                              <td>{{ $order->customer->phone }}</td>
                               <td>{{ $order->customer->address }}</td>
                               <td>{{ $order->birthdate }}</td>
                               <td>{{ $order->time }}</td>
@@ -62,25 +58,23 @@
                               <td>{{ $order->count }}</td>
                               <td>{{ $order->prodect->price }} $</td>
                               <td>{{ $order->prodect->price * $order->count }} $</td>
-                              <td style="display: inline-block; width: auto; padding: 17px; text-align: center; vertical-align: middle;" class="
-                                  @if ($order->status == 'يتم مراجعة الطلب') 
-                                      bg-secondary text-white 
-                                  @elseif($order->status == 'قبول') 
-                                      bg-primary text-white 
-                                  @elseif($order->status == 'رفض') 
-                                      bg-danger text-white 
-                                  @elseif($order->status == 'اتمام') 
-                                      bg-success text-white 
-                                  @endif">
-                                  {{ $order->status }}
-                              </td>
+                              <td style="width: 150px; height: 60px; padding: 17px; text-align: center; vertical-align: middle; display: flex; align-items: center; justify-content: center;" class="
+                              @if ($order->status == 'يتم مراجعة الطلب') 
+                                  bg-secondary text-white 
+                              @elseif($order->status == 'قبول') 
+                                  bg-primary text-white 
+                              @elseif($order->status == 'رفض') 
+                                  bg-danger text-white 
+                              @elseif($order->status == 'اتمام') 
+                                  bg-success text-white 
+                              @endif">
+                              {{ $order->status }}
+                          </td>
                               
                           </tr>
                           @endforeach
                           @foreach ($offers as $offer)
                           <tr>
-                              <td>{{ $offer->customer->name }}</td>
-                              <td>{{ $offer->customer->phone }}</td>
                               <td>{{ $offer->customer->address }}</td>
                               <td>{{ $offer->birthdate }}</td>
                               <td>{{ $offer->time }}</td>
@@ -88,18 +82,20 @@
                               <td>{{ $offer->count }}</td>
                               <td>{{ $offer->offer->price }} $</td>
                               <td>{{ $offer->offer->price * $offer->count }} $</td>
-                              <td style="display: inline-block; width: auto; padding: 17px; text-align: center; vertical-align: middle;" class="
-                                  @if ($offer->status == 'يتم مراجعة الطلب') 
-                                      bg-secondary text-white 
-                                  @elseif($offer->status == 'قبول') 
-                                      bg-primary text-white 
-                                  @elseif($offer->status == 'رفض') 
-                                      bg-danger text-white 
-                                  @elseif($offer->status == 'اتمام') 
-                                      bg-success text-white 
-                                  @endif">
-                                  {{ $offer->status }}
-                              </td>
+                              <td style="width: 150px; height: 60px; padding: 17px; text-align: center; vertical-align: middle; display: flex; align-items: center; justify-content: center;" class="
+                              @if ($offer->status == 'يتم مراجعة الطلب') 
+                                  bg-secondary text-white 
+                              @elseif($offer->status == 'قبول') 
+                                  bg-primary text-white 
+                              @elseif($offer->status == 'رفض') 
+                                  bg-danger text-white 
+                              @elseif($offer->status == 'اتمام') 
+                                  bg-success text-white 
+                              @endif">
+                              {{ $offer->status }}
+                          </td>
+                          
+                          
                               
                           </tr>
                           @endforeach

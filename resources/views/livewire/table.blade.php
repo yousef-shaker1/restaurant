@@ -67,11 +67,12 @@
               </div>
             </form>
             @else
-            <div class="btn_box">
-              <a href='{{ route('login') }}' class="btn1">
-                login
+            <div class="mt-4">
+              <a href='{{ route('login') }}' class="btn btn-primary">
+                  Login
               </a>
-            </div>
+          </div>
+          
             @endif
           </div>
         </div>

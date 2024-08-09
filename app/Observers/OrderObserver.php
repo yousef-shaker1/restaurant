@@ -15,7 +15,7 @@ class OrderObserver
      */
     public function created(prodect $prodect): void
     {
-        $user = auth()->user();
+        $user = auth()->user()->id;
         $users = User::where('id', '!=', $user)->get();
         $user_create = User::where('id', $user)->first();
         if ($users->isNotEmpty()) {
