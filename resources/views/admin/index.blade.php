@@ -31,7 +31,21 @@
       .navbar-custom .nav-link:hover {
           color: #d4d4d4;
       }
-      
+      .custom-card-container .custom-card .card {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.custom-card-container .card-header {
+    padding: 15px;
+    border-bottom: none;
+}
+
+.custom-card-container .card-title,
+.custom-card-container .main-content-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
   </style>
 </head>
 <body>
@@ -93,7 +107,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
