@@ -196,7 +196,7 @@ aria-hidden="true">
            </button>
        </div>
        <div class="modal-body">
-           <form action="{{ route('offer.update', $i) }}" method="post" autocomplete="off">
+           <form action="{{ route('offer.update', $i) }}" method="post" autocomplete="off" enctype="multipart/form-data">
                @method('PATCH')
                @csrf
                <div class="form-group">

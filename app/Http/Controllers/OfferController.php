@@ -99,13 +99,15 @@ class OfferController extends Controller
     {
         $offer = offer::find($request->id);
         $data = $request->validated();
+        
         if($request->hasFile('image')){
             if (!empty($offer->image) && Storage::disk('public')->exists($offer->image)) {
                 Storage::disk('public')->delete($offer->image);
             }
-            $data['image'] = $request->file('image')->store('photo', 'public');
+            $data['image'] =  $request->file('image')->store('photo', 'public');
         }else{
             unset($data['image']);
+
         }
         $offer->update($data);
 

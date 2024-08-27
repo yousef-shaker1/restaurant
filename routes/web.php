@@ -1,24 +1,16 @@
 <?php
 
-use App\Models\offer;
-use App\Models\prodect;
-use App\Models\section;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\StripeController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProdectController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserpageController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------

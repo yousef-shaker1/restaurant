@@ -26,7 +26,7 @@ class checkprodect extends FormRequest
             'description' => 'required|min:5',
             'price' => 'required',
             'section_id' => 'required',
-            // 'image' => 'required'
+            'image' => 'required'
         ];
     }
 }

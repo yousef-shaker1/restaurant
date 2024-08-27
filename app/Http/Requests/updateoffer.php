@@ -25,7 +25,7 @@ class updateoffer extends FormRequest
             'name' => 'nullable|min:2',
             'description' => 'nullable|min:5',
             'price' => 'nullable',
-            // 'image' => 'nullable'
+            'image' => 'nullable'
         ];
     }
 }
